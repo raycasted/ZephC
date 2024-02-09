@@ -52,8 +52,8 @@ find_package(SDL2 REQUIRED)
 target_link_libraries(${PROJECT_NAME} SDL2::Main)
 
 # Add SDL2_image library
-#find_package(SDL2_image REQUIRED)
-#target_link_libraries(${PROJECT_NAME} SDL2::Image)
+find_package(SDL2_image REQUIRED)
+target_link_libraries(${PROJECT_NAME} SDL2::Image)
 
 # Add SDL2_ttf library
 #find_package(SDL2_ttf REQUIRED)
@@ -64,9 +64,9 @@ target_link_libraries(${PROJECT_NAME} SDL2::Main)
 #target_link_libraries(${PROJECT_NAME} SDL2::Net)
 
 # Add SDL2_mixer library
-#find_package(SDL2_mixer REQUIRED)
-#target_link_libraries(${PROJECT_NAME} SDL2::Mixer)
+find_package(SDL2_mixer REQUIRED)
+target_link_libraries(${PROJECT_NAME} SDL2::Mixer)
 
 # Add SDL2_gfx library
-#find_package(SDL2_gfx REQUIRED)
-#target_link_libraries(${PROJECT_NAME} SDL2::GFX)
+find_package(SDL2_gfx REQUIRED)
+target_link_libraries(${PROJECT_NAME} SDL2::GFX)

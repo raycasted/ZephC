@@ -52,11 +52,15 @@ int main(int argc, char *argv[]) {
   // Unused argc, argv
   (void)argc;
   (void)argv;
+  // Initialize variables
   gameInfo ginfo;
   ginfo.player.x = 50;
   ginfo.player.y = 50;
-  ginfo.player.w = 50;
-  ginfo.player.h = 50;
+  ginfo.player.w = 32;
+  ginfo.player.h = 64;
+  ginfo.playerXvel = 0.0f;
+  //float playerIncSpeed = 3.14159;
+
   // Initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     printf("SDL could not be initialized!\n"
@@ -90,9 +94,11 @@ int main(int argc, char *argv[]) {
              "SDL_Error: %s\n",
              SDL_GetError());
     } else {
+      IMG_Init(0);
 
       // Event loop exit flag
       // bool quit = false;
+      ginfo.playerTex = IMG_LoadTexture(renderer, "resources/player.png");
 
       // Game loop
       while (true) {
@@ -109,12 +115,15 @@ int main(int argc, char *argv[]) {
         if (e.type == SDL_KEYDOWN) {
           // printf("huh");
           if (e.key.keysym.sym == SDLK_RIGHT) {
-            // printf("WHY???");
-            ginfo.player.x += 5;
+            ginfo.player.x += 3;
+          }
+          if (e.key.keysym.sym == SDLK_LEFT) {
+            ginfo.player.x += 3;
           }
           if (e.key.keysym.sym == SDLK_ESCAPE) {
             break;
           }
+
         }
 
         GameUpdate(renderer);
@@ -126,6 +135,8 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);
 
         GameDraw(renderer, ginfo);
+
+        SDL_RenderCopy(renderer, ginfo.playerTex, NULL, &ginfo.player);
 
         // Update screen
         SDL_RenderPresent(renderer);
